@@ -1,4 +1,4 @@
-# Project Title
+# Ionic Rest Service Calls
 
 Examples of how you consume REST Api services with Ionic Framework
 
