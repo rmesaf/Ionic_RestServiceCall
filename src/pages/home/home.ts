@@ -9,16 +9,25 @@ import { UserService} from '../../providers/user-service';
 })
 export class HomePage {
 
-  users: any[] = [];
+  //users: any[] = [];
+  users: any;
+  user = { name: '', username: '', email: '', phone: '', website: '', address: { street: '', suite: '', city: '', zipcode: '', geo: { lat: '', lng: '' } }, company: { name: '', bs: '', catchPhrase: '' }};
 
-  constructor(
-    public navCtrl: NavController,
-    public userService: UserService
-  ) {
-      this.getUsuarios();
+  constructor(public navCtrl: NavController, public userService: UserService) {
+      this.getUsers();
   }
 
-  getUsuarios(){
+  // Event Submit
+  saveUser(){
+    this.userService.setUsers_(this.user).then((result) => {
+      console.log(result);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+
+  getUsers(){
     this.userService.getUsers()
     .subscribe(
       (data) => {
@@ -28,6 +37,16 @@ export class HomePage {
         console.error(error);
       }
     )
+  }
+  getUsers_(){
+    this.userService.getUsers_()
+    .then(data => {
+        this.users = data;
+      },
+      (error) =>{
+        console.error(error);
+      }
+    );
   }
 
   
